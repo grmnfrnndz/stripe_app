@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/blocs.dart';
 import 'pages/pages.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(State());
+
+class State extends StatelessWidget {
+  const State({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (BuildContext context) => PagarBloc(),)
+    ], 
+    child: MyApp());
+  }
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,8 +30,8 @@ class MyApp extends StatelessWidget {
         'pago_completo': (BuildContext context) => PagoCompletoPage(),
       },
       theme: ThemeData.light().copyWith(
-        primaryColor: Color(0xff284879),
-        scaffoldBackgroundColor: Color(0xff21232A)
+        primaryColor: const Color(0xff284879),
+        scaffoldBackgroundColor: const Color(0xff21232A)
       ),
     );
   }
